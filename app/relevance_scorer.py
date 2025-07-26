@@ -11,12 +11,12 @@ class RelevanceScorer:
         Uses cosine similarity with the combined persona/job embedding.
         """
         if self.query_embedding is None or not self.persona_analyzer.model or not text_content:
-            return 0.0 # Cannot score if no query embedding or model not loaded or no text
+            return 0.0
 
         try:
             text_embedding = self.persona_analyzer.model.encode(text_content, convert_to_tensor=False)
             similarity = util.cos_sim(self.query_embedding, text_embedding).item()
-            return max(0.0, similarity) # Ensure score is not negative
+            return max(0.0, similarity)
         except Exception as e:
             print(f"Error scoring text: {e}")
-            return 0.0 # Return 0 if scoring fails
+            return 0.0

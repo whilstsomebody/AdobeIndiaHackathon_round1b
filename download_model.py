@@ -1,7 +1,6 @@
 import os
 from sentence_transformers import SentenceTransformer
 
-# Define the local path where you want to save the model
 model_name = 'all-MiniLM-L6-v2'
 local_model_path = os.path.join('app', 'models', model_name)
 
