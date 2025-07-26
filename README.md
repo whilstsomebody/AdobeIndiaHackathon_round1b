@@ -36,6 +36,24 @@ I've carefully selected libraries and a model that comply with the hackathon's c
 * **`sentence-transformers` (with `all-MiniLM-L6-v2`):** I use this for generating semantic embeddings, which is critical for understanding the persona's intent and scoring the relevance of document content. [cite_start]The `all-MiniLM-L6-v2` model is well under the $\le 1GB$ model size constraint[cite: 361].
 * **`scikit-learn`, `numpy`, `scipy`:** These are foundational Python libraries that support the numerical operations and utilities used in my solution.
 
+```mermaid
+graph TD
+    A[Start] --> B(Input: PDF Collection, challenge1b_input.json);
+    B --> C{For each PDF in Collection};
+    C --> D(PDFParser: Extract Sections & Sub-sections);
+    D --> E(Extract Text Content);
+    E --> F{End For};
+    F --> G(PersonaAnalyzer: Understand Persona & Job-to-be-Done);
+    G --> H(Generate Persona/Job Query Embedding);
+    H --> I(RelevanceScorer: Score Each Section/Sub-section);
+    I --> J(Generate Section/Sub-section Embeddings);
+    J --> K(Calculate Cosine Similarity with Query Embedding);
+    K --> L(Refine Sub-section Text for Analysis);
+    L --> M(Global Ranking of Sections & Sub-sections by Relevance);
+    M --> N(OutputFormatter: Assemble challenge1b_output.json);
+    N --> O[End: challenge1b_output.json generated];
+```
+
 ### Constraints Adhered To
 
 I've ensured my solution strictly adheres to all specified constraints:
